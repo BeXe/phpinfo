@@ -17,8 +17,9 @@ spec:
       generic:
         secret: secret101
   runPolicy: Serial
-  source:
-    type: None
+    source:
+    git:
+      uri: "https://github.com/BeXe/phpinfo/"
   strategy:
      type: JenkinsPipeline
      jenkinsPipelineStrategy:
