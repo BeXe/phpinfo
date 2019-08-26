@@ -12,8 +12,8 @@ runPolicy: Serial
   strategy:
      type: JenkinsPipeline
      jenkinsPipelineStrategy:
-jenkinsfilePath: Jenkinsfile-build
-  triggers:
+      jenkinsfilePath: Jenkinsfile-build
+triggers:
   - github:
       secret: gitsecret
     type: GitHub
