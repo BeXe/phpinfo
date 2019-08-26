@@ -1,5 +1,15 @@
-        node(''){
-          stage 'Build using your-yourconfig'
-              openshiftBuild(namespace: 'your-project', bldCfg: 'your-buildconfig', showBuildLogs: 'true')
-          stage 'Deployment using your-deploymentconfig'
-              openshiftDeploy(namespace: 'your-project', depCfg: 'your-deploymentconfig')
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+         openshiftBuild(namespace: 'scp-web-ct', bldCfg: 'php-info-pipeline-test', showBuildLogs: 'true')
+      }
+    }
+       stage('Deploy') {
+      steps {
+         openshiftDeploy(namespace: 'scp-web-ct', depCfg: 'php-info-pipeline-test')
+      }
+    }
+  }
+}
