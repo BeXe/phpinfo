@@ -1,0 +1,5 @@
+        node(''){
+          stage 'Build using your-yourconfig'
+              openshiftBuild(namespace: 'your-project', bldCfg: 'your-buildconfig', showBuildLogs: 'true')
+          stage 'Deployment using your-deploymentconfig'
+              openshiftDeploy(namespace: 'your-project', depCfg: 'your-deploymentconfig')
