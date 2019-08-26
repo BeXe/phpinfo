@@ -3,22 +3,22 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        openshiftBuild 'php-pipeline-test'
+        openshiftBuild 'php-info-pipeline-test'
       }
     }
     stage('Verify build') {
       steps {
-        openshiftVerifyBuild 'php-pipeline-test'
+        openshiftVerifyBuild 'php-info-pipeline-test'
       }
     }
     stage('Deploy') {
       steps {
-        openshiftDeploy 'php-pipeline-test'
+        openshiftDeploy 'php-info-pipeline-test'
       }
     }
     stage('Verify Deployment') {
       steps {
-        openshiftVerifyDeployment 'php-pipeline-test'
+        openshiftVerifyDeployment 'php-info-pipeline-test'
       }
     }
   }
