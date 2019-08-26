@@ -5,18 +5,14 @@ metadata:
     name: your-pipeline
   name: your-pipeline
 spec:
-  runPolicy: Serial
+runPolicy: Serial
+    source:
+    git:
+      uri: "https://github.com/BeXe/phpinfo/"
   strategy:
-    jenkinsPipelineStrategy:
-      jenkinsfile: |-
-        node(''){
-          stage 'Build using your-yourconfig'
-              openshiftBuild(namespace: 'your-project', bldCfg: 'your-buildconfig', showBuildLogs: 'true')
-          stage 'Deployment using your-deploymentconfig'
-              openshiftDeploy(namespace: 'your-project', depCfg: 'your-deploymentconfig')
-
-        }
-    type: JenkinsPipeline
+     type: JenkinsPipeline
+     jenkinsPipelineStrategy:
+jenkinsfilePath: Jenkinsfile-build
   triggers:
   - github:
       secret: gitsecret
