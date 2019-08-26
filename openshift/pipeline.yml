@@ -5,14 +5,24 @@ metadata:
   labels:
     name: myfirstpipeline
   annotations:
-    pipeline.alpha.openshift.io/uses: '[{"name": "myphp", "namespace": "", "kind": "DeploymentConfig"}]'
+    pipeline.alpha.openshift.io/uses: '[{"name": "php-info-pipeline", "namespace": "", "kind": "DeploymentConfig"}]'
 spec:
-    source:
-    git:
-      uri: "https://github.com/BeXe/phpinfo"
+  triggers:
+    -
+      type: GitHub
+      github:
+        secret: secret101
+    -
+      type: Generic
+      generic:
+        secret: secret101
+  runPolicy: Serial
+  source:
+    type: None
   strategy:
+    type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfilePath:
+      jenkinsfile: "node('maven') {\nstage 'build'\nopenshiftBuild(buildConfig: 'php-info-pipeline', showBuildLogs: 'true')\nstage 'deploy'\nopenshiftDeploy(deploymentConfig: 'php-info-pipeline')\nopenshiftScale(deploymentConfig: 'php-info-pipeline',replicaCount: '2')\n}"
   output:
   resources:
   postCommit:
