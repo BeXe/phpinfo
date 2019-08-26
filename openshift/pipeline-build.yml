@@ -5,15 +5,15 @@ metadata:
     name: your-pipeline
   name: your-pipeline
 spec:
-runPolicy: Serial
-    source:
+  runPolicy: Serial
+  source:
     git:
       uri: "https://github.com/BeXe/phpinfo/"
   strategy:
      type: JenkinsPipeline
      jenkinsPipelineStrategy:
       jenkinsfilePath: Jenkinsfile-build
-triggers:
+  triggers:
   - github:
       secret: gitsecret
     type: GitHub
