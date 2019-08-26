@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  labels:
+    name: your-pipeline
+  name: your-pipeline
+spec:
+  runPolicy: Serial
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        node(''){
+          stage 'Build using your-yourconfig'
+              openshiftBuild(namespace: 'your-project', bldCfg: 'your-buildconfig', showBuildLogs: 'true')
+          stage 'Deployment using your-deploymentconfig'
+              openshiftDeploy(namespace: 'your-project', depCfg: 'your-deploymentconfig')
+
+        }
+    type: JenkinsPipeline
+  triggers:
+  - github:
+      secret: gitsecret
+    type: GitHub
+  - generic:
+      secret: genericsecret
+    type: Generic
